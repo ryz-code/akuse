@@ -52,18 +52,18 @@
 }
 
 .container .b-player .i {
-  transition: 0.1s ease-out;
-  will-change: transform;
+  transition: 0.1s;
+
 }
 
 .container .b-player:hover .i {
   color: var(--font-1);
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .container .b-player:active .i {
+  color: var(--font-2);
   transform: scale(1);
-  color: var(--color-transparency);
 }
 
 .container .next {
@@ -95,7 +95,6 @@
   height: 3px;
   position: relative;
   background: var(--color-transparency);
-  /* border-radius: var(--border-radius); */
   transition: ease 0.1s;
 }
 
@@ -103,7 +102,11 @@
   height: 8px;
 }
 
-/* .progress-area span */
+.video-timeline.is-dragging .progress-area {
+  height: 8px;
+  filter: brightness(0.8);
+}
+
 .progress-area span {
   position: absolute;
   left: 50%;
@@ -115,24 +118,6 @@
   transform: translateX(-50%);
 }
 
-/* .progress-area .preview-thumbnail img {
-  width: 240px;
-  height: 135px;
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
-}
-
-.progress-area .preview-thumbnail .time {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 240px;
-  height: 30px;
-}
-
-.progress-area .preview-thumbnail .time span {
-  font-size: 1.1rem;
-} */
-
 .progress-area .video-buffered-bar {
   position: absolute;
   top: 0;
@@ -142,7 +127,6 @@
   margin: 0;
   z-index: 1;
   background: var(--color-transparency-2);
-  /* border-radius: var(--border-radius) 0 0 var(--border-radius); */
 }
 
 .progress-area .video-event-bar {
@@ -152,7 +136,6 @@
   margin: 0;
   z-index: 101;
   background: rgba(214, 255, 64, 0.75);
-  /* border-radius: var(--border-radius) 0 0 var(--border-radius); */
 }
 
 .progress-area .video-progress-bar {
@@ -175,16 +158,6 @@
   border-radius: 50%;
   background: var(--color-important);
   transform: translateY(-50%);
-}
-
-.video-progress-bar::before,
-.progress-area span {
-  display: none;
-}
-
-.video-timeline:hover .video-progress-bar::before,
-.video-timeline:hover .progress-area span {
-  display: block;
 }
 
 .shadow-controls {
@@ -367,12 +340,9 @@
   opacity: 0;
   width: 400px;
   opacity: 0.95;
-  /* backdrop-filter: blur(50px); */
   list-style: none;
-  /* overflow: hidden; */
   border-radius: var(--border-radius);
   background-color: #22252ee6;
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
   transition: opacity 0.13s ease;
   pointer-events: auto;
 }
@@ -570,7 +540,7 @@
 }
 
 .bottom-controls .video-duration:active {
-  transform: scale(0.95);
+  /* transform: scale(0.95); */
 }
 
 .skip-button {

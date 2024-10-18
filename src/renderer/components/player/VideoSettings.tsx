@@ -1,12 +1,10 @@
 import { ISubtitle } from '@consumet/extensions';
 import {
-  faCirclePlay,
   faClock,
   faGear,
   faHeadphones,
   faLanguage,
   faRotateRight,
-  faSpinner,
   faVideo,
   faVolumeHigh,
   faVolumeLow,
@@ -15,19 +13,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Store from 'electron-store';
 import Hls from 'hls.js';
-import React, {
-  ChangeEvent,
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ChangeEvent, forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import Dots from 'react-activity/dist/Dots';
 
-import { AuthContext } from '../../App';
 import Select from '../Select';
-import { LANGUAGE_OPTIONS } from '../../tabs/Tab4';
 
 const STORE = new Store();
 
@@ -57,22 +46,11 @@ const VideoSettings = forwardRef<HTMLDivElement, SettingsProps>(
     },
     ref,
   ) => {
-    const logged = useContext(AuthContext);
-
     subtitleTracks = subtitleTracks?.filter((value) => value.lang);
 
     const [hlsData, setHlsData] = useState<Hls>();
-    const [updateProgress, setUpdateProgress] = useState<boolean>(
-      STORE.get('update_progress') as boolean,
-    );
-    const [autoplayNext, setAutoplayNext] = useState<boolean>(
-      STORE.get('autoplay_next') as boolean,
-    );
     const [watchDubbed, setWatchDubbed] = useState<boolean>(
       STORE.get('dubbed') as boolean,
-    );
-    const [selectedLanguage, setSelectedLanguage] = useState<string>(
-      STORE.get('source_flag') as string,
     );
     const [introSkipTime, setIntroSkipTime] = useState<number>(
       STORE.get('intro_skip_time') as number,
@@ -170,16 +148,6 @@ const VideoSettings = forwardRef<HTMLDivElement, SettingsProps>(
       }
     };
 
-    const handleUpdateProgressChange = () => {
-      STORE.set('update_progress', !updateProgress);
-      setUpdateProgress(!updateProgress);
-    };
-
-    const handleAutoplayNext = () => {
-      STORE.set('autoplay_next', !autoplayNext);
-      setAutoplayNext(!autoplayNext);
-    };
-
     const handleWatchDubbedChange = async () => {
       const previous = STORE.get('dubbed');
       STORE.set('dubbed', !watchDubbed);
@@ -191,22 +159,6 @@ const VideoSettings = forwardRef<HTMLDivElement, SettingsProps>(
         setChangeEpisodeLoading(false);
       } else {
         STORE.set('dubbed', previous);
-        setChangeEpisodeLoading(false);
-      }
-    };
-
-    const handleLanguageChange = async (value: any) => {
-      console.log(value)
-      const previous = STORE.get('source_flag');
-      STORE.set('source_flag', value);
-  
-      setChangeEpisodeLoading(true);
-  
-      if (await onChangeEpisode(null, true)) {
-        setSelectedLanguage(value);
-        setChangeEpisodeLoading(false);
-      } else {
-        STORE.set('source_flag', previous);
         setChangeEpisodeLoading(false);
       }
     };
@@ -381,25 +333,6 @@ const VideoSettings = forwardRef<HTMLDivElement, SettingsProps>(
                 </label>
               )}
             </li>
-            {/* <li className="language">
-              <span>
-                <FontAwesomeIcon className="i label" icon={faLanguage} />
-                Language
-              </span>
-              {changeEpisodeLoading ? (
-                <div className="activity-indicator">
-                  <Dots />
-                </div>
-              ) : (
-                <Select
-                  zIndex={9}
-                  options={LANGUAGE_OPTIONS}
-                  selectedValue={selectedLanguage}
-                  onChange={handleLanguageChange}
-                  width={140}
-                />
-              )}
-            </li> */}
           </div>
         )}
       </div>

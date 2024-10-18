@@ -245,12 +245,12 @@ const Tab4: React.FC<{ viewerId: number | null }> = ({ viewerId }) => {
       case 'General':
         return (
           <div className="show">
-            <CheckboxElement
+            {/* <CheckboxElement
               label="Light mode (disables some data fetching, which can help avoid issues for slow connections)."
               checked={lightMode}
               newItem
               onChange={handleLightMode}
-            />
+            /> */}
 
             <CheckboxElement
               label="Show 18+ content"

@@ -534,6 +534,7 @@ main .entries-container .anime-entry {
   margin-bottom: 12px;
   background-color: var(--color-3);
   border-radius: var(--border-radius);
+  transition: 0.1s linear;
 }
 
 .settings-page .item.clickable {

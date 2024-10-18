@@ -87,6 +87,13 @@ const VideoPlayer: React.FC<{
     episodesInfo,
   );
 
+  const isPlaying = () =>
+    videoRef.current &&
+    videoRef.current.currentTime > 0 &&
+    !videoRef.current.paused &&
+    !videoRef.current.ended &&
+    videoRef.current.readyState > videoRef.current.HAVE_CURRENT_DATA;
+
   if (!activity && episodeTitle) {
     setActivity(true);
     ipcRenderer.send('update-presence', {
@@ -333,6 +340,7 @@ const VideoPlayer: React.FC<{
       getSkipEvents(animeEpisodeNumber, video);
     }
   }, [video, listAnime]);
+
   const setSubtitleTrack = (subtitleTrack: ISubtitle) => {
     if (!videoRef.current) return;
 
@@ -429,8 +437,10 @@ const VideoPlayer: React.FC<{
   const playVideo = () => {
     if (videoRef.current) {
       try {
-        setPlaying(true);
-        videoRef.current.play();
+        if (!isPlaying()) {
+          setPlaying(true);
+          videoRef.current.play();
+        }
       } catch (error) {
         console.log(error);
       }
@@ -872,7 +882,6 @@ const VideoPlayer: React.FC<{
           className={`container ${showControls ? 'show-controls' : ''} ${showPauseInfo ? 'show-pause-info' : ''}`}
           onMouseMove={handleMouseMove}
           ref={containerRef}
-          // onKeyDown={handleKeydown}
         >
           <div className="pause-info">
             <div className="content">
@@ -942,12 +951,15 @@ const VideoPlayer: React.FC<{
               duration={duration}
               skipEvents={skipEvents}
               buffered={buffered}
+              playVideo={playVideo}
+              pauseVideo={pauseVideo}
               onClick={togglePlayingWithoutPropagation}
               onDblClick={toggleFullScreenWithoutPropagation}
             />
           </div>
           <video
             id="video"
+            playsInline
             ref={videoRef}
             onKeyDown={handleKeydown}
             onTimeUpdate={handleTimeUpdate}

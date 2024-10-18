@@ -4,7 +4,7 @@
   height: min-content;
   margin-top: 10px;
   /* must be in anime-entry or hover scaling won't work */
-  transition: transform 0.25s linear;
+  transition: transform 0.20s linear;
   border-radius: var(--border-radius);
   will-change: transform;
 }
