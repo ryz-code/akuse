@@ -14,7 +14,6 @@ import { clientData } from '../clientData';
 import isAppImage from '../packaging/isAppImage';
 import { getOptions, makeRequest } from '../requests';
 
-
 const STORE: any = new Store();
 const CLIENT_DATA: ClientData = clientData;
 const PAGES: number = 20;

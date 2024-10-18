@@ -60,6 +60,14 @@ export type AiringSchedule = {
   media?: Media;
 };
 
+export type AiringScheduleConnection = {
+  edges?: Array<{
+    node?: {
+      episode: number;
+    };
+  }>;
+};
+
 export type MediaListStatus =
   | 'CURRENT'
   | 'PLANNING'
@@ -155,13 +163,7 @@ export type Media = {
   favourites?: number;
   isAdult?: boolean;
   nextAiringEpisode?: AiringSchedule;
-  airingSchedule?: {
-    edges?: Array<{
-      node?: {
-        episode: number;
-      };
-    }>;
-  };
+  airingSchedule?: AiringScheduleConnection;
   mediaListEntry?: MediaList;
   siteUrl?: string;
   trailer?: MediaTrailer;

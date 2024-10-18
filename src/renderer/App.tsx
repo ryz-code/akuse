@@ -112,6 +112,7 @@ export default function App() {
     const historyAvailable = Object.values(entries).length > 0;
 
     let result: ListAnimeData[] = [];
+
     const sortNewest = (a: ListAnimeData, b: ListAnimeData) =>
       (getLastWatchedEpisode(
         (b.media.id ??
