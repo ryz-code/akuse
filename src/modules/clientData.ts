@@ -1,7 +1,7 @@
 import { ClientData } from "../types/types";
 
 export const clientData: ClientData = {
-  clientId: 12345,
+  clientId: 22149,
   redirectUri: 'akuse://index',
-  clientSecret: 'iA04TKLO3k3LaVWhxucJwck0glR6uhiv',
+  clientSecret: 'bgayIVw550cYygRmfDuCzIKGmTTscDbh3XitVoPS',
 };
